@@ -12,7 +12,7 @@
 
 <meta name="author" content="Steffi LaZerte" />
 
-<meta name="date" content="2018-07-02" />
+<meta name="date" content="2018-10-08" />
 
 <title>The meanings of flags</title>
 
@@ -32,7 +32,7 @@
 
 <h1 class="title toc-ignore">The meanings of flags</h1>
 <h4 class="author"><em>Steffi LaZerte</em></h4>
-<h4 class="date"><em>2018-07-02</em></h4>
+<h4 class="date"><em>2018-10-08</em></h4>
 
 
 
@@ -64,12 +64,12 @@
 <pre><code>## # A tibble: 6 x 5
 ##   date       total_precip total_precip_flag snow_grnd_last_day snow_grnd_last_day_flag
 ##   &lt;date&gt;            &lt;dbl&gt; &lt;chr&gt;                          &lt;dbl&gt; &lt;chr&gt;                  
-## 1 2017-09-01         63.0 ^                               0    &quot;&quot;                     
-## 2 2017-10-01        141   ^                               0    &quot;&quot;                     
-## 3 2017-11-01         70.0 ^                               0    &quot;&quot;                     
-## 4 2017-12-01         45.7 ^                              10.0  &quot;&quot;                     
-## 5 2018-01-01         34.6 ^                               2.00 &quot;&quot;                     
-## 6 2018-02-01         77.2 ^                               0    &quot;&quot;</code></pre>
+## 1 2017-09-01         63   ^                                  0 &quot;&quot;                     
+## 2 2017-10-01        141.  ^                                  0 &quot;&quot;                     
+## 3 2017-11-01         70   ^                                  0 &quot;&quot;                     
+## 4 2017-12-01         45.7 ^                                 10 &quot;&quot;                     
+## 5 2018-01-01         34.6 ^                                  2 &quot;&quot;                     
+## 6 2018-02-01         77.2 ^                                  0 &quot;&quot;</code></pre>
 <p>As you can see, we still have the two flags, but the missing data flag (<code>M</code>) is now replaced with NA. The other flag <code>^</code> is not, as it indicates that “The value displayed is based on incomplete data” (see below).</p>
 </div>
 <div id="flags" class="section level2">
