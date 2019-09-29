@@ -2,7 +2,7 @@ Package: weathercan
 Type: Package
 Title: Download Weather Data from the Environment and Climate Change
         Canada Website
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
      person("Steffi", "LaZerte", email = "steffi@steffi.ca", role = c("aut","cre"), comment = c(ORCID = "0000-0002-7690-8360")),
      person("Sam", "Albers", email = "sam.albers@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-9270-7884")),
@@ -29,10 +29,10 @@ Suggests: devtools, ggplot2, ggmap, htmltools, knitr, leaflet, lutz,
 VignetteBuilder: knitr
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-09-24 21:53:12 UTC; steffi
+Packaged: 2019-09-28 21:54:45 UTC; steffi
 Author: Steffi LaZerte [aut, cre] (<https://orcid.org/0000-0002-7690-8360>),
   Sam Albers [ctb] (<https://orcid.org/0000-0002-9270-7884>),
   Nick Brown [ctb] (<https://orcid.org/0000-0002-2719-0671>)
 Maintainer: Steffi LaZerte <steffi@steffi.ca>
 Repository: CRAN
-Date/Publication: 2019-09-25 09:50:02 UTC
+Date/Publication: 2019-09-29 16:00:02 UTC
