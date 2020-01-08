@@ -1,4 +1,4 @@
-## ---- include = FALSE, message = FALSE-----------------------------------
+## ---- include = FALSE, message = FALSE----------------------------------------
 library(weathercan)
 library(dplyr)
 library(tidyr)
