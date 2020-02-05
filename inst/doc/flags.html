@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Steffi LaZerte" />
 
-<meta name="date" content="2020-01-07" />
+<meta name="date" content="2020-02-04" />
 
 <title>The meanings of flags and codes</title>
 
@@ -32,9 +31,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -203,7 +199,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -218,7 +215,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">The meanings of flags and codes</h1>
 <h4 class="author">Steffi LaZerte</h4>
-<h4 class="date">2020-01-07</h4>
+<h4 class="date">2020-02-04</h4>
 
 
 
@@ -233,35 +230,35 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <pre><code>## # A tibble: 12 x 6
 ##    station_name `Date/Time` `Total Precip (m… `Total Precip Fl… `Snow Grnd Last D… `Snow Grnd Last …
 ##    &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;              &lt;chr&gt;            
-##  1 MAGOG        2017-03     30.4              ^                 &quot;&quot;                 M                
-##  2 MAGOG        2017-04     114.0             ^                 0                  &quot;&quot;               
-##  3 MAGOG        2017-05     78.8              ^                 0                  &quot;&quot;               
-##  4 MAGOG        2017-06     140.7             ^                 0                  &quot;&quot;               
-##  5 MAGOG        2017-07     80.7              &quot;&quot;                0                  &quot;&quot;               
-##  6 MAGOG        2017-08     135.8             &quot;&quot;                0                  &quot;&quot;               
-##  7 MAGOG        2017-09     63.0              ^                 0                  &quot;&quot;               
-##  8 MAGOG        2017-10     140.8             ^                 0                  &quot;&quot;               
-##  9 MAGOG        2017-11     70.0              ^                 0                  &quot;&quot;               
-## 10 MAGOG        2017-12     45.7              ^                 10                 &quot;&quot;               
-## 11 MAGOG        2018-01     34.6              ^                 2                  &quot;&quot;               
-## 12 MAGOG        2018-02     77.2              ^                 0                  &quot;&quot;</code></pre>
+##  1 MAGOG        2017-03     30.4              &quot;^&quot;               &quot;&quot;                 &quot;M&quot;              
+##  2 MAGOG        2017-04     114.0             &quot;^&quot;               &quot;0&quot;                &quot;&quot;               
+##  3 MAGOG        2017-05     78.8              &quot;^&quot;               &quot;0&quot;                &quot;&quot;               
+##  4 MAGOG        2017-06     140.7             &quot;^&quot;               &quot;0&quot;                &quot;&quot;               
+##  5 MAGOG        2017-07     80.7              &quot;&quot;                &quot;0&quot;                &quot;&quot;               
+##  6 MAGOG        2017-08     135.8             &quot;&quot;                &quot;0&quot;                &quot;&quot;               
+##  7 MAGOG        2017-09     63.0              &quot;^&quot;               &quot;0&quot;                &quot;&quot;               
+##  8 MAGOG        2017-10     140.8             &quot;^&quot;               &quot;0&quot;                &quot;&quot;               
+##  9 MAGOG        2017-11     70.0              &quot;^&quot;               &quot;0&quot;                &quot;&quot;               
+## 10 MAGOG        2017-12     45.7              &quot;^&quot;               &quot;10&quot;               &quot;&quot;               
+## 11 MAGOG        2018-01     34.6              &quot;^&quot;               &quot;2&quot;                &quot;&quot;               
+## 12 MAGOG        2018-02     77.2              &quot;^&quot;               &quot;0&quot;                &quot;&quot;</code></pre>
 <p>In this output, you can see two flags: <code>^</code> in <code>Total Precip</code> and <code>M</code> in <code>Snow Grnd Last Day</code></p>
 <p>This same sample, formatted looks like:</p>
 <pre><code>## # A tibble: 12 x 5
 ##    date       total_precip total_precip_flag snow_grnd_last_day snow_grnd_last_day_flag
 ##    &lt;date&gt;            &lt;dbl&gt; &lt;chr&gt;                          &lt;dbl&gt; &lt;chr&gt;                  
-##  1 2017-03-01         30.4 ^                                 NA M                      
-##  2 2017-04-01        114   ^                                  0 &quot;&quot;                     
-##  3 2017-05-01         78.8 ^                                  0 &quot;&quot;                     
-##  4 2017-06-01        141.  ^                                  0 &quot;&quot;                     
+##  1 2017-03-01         30.4 &quot;^&quot;                               NA &quot;M&quot;                    
+##  2 2017-04-01        114   &quot;^&quot;                                0 &quot;&quot;                     
+##  3 2017-05-01         78.8 &quot;^&quot;                                0 &quot;&quot;                     
+##  4 2017-06-01        141.  &quot;^&quot;                                0 &quot;&quot;                     
 ##  5 2017-07-01         80.7 &quot;&quot;                                 0 &quot;&quot;                     
 ##  6 2017-08-01        136.  &quot;&quot;                                 0 &quot;&quot;                     
-##  7 2017-09-01         63   ^                                  0 &quot;&quot;                     
-##  8 2017-10-01        141.  ^                                  0 &quot;&quot;                     
-##  9 2017-11-01         70   ^                                  0 &quot;&quot;                     
-## 10 2017-12-01         45.7 ^                                 10 &quot;&quot;                     
-## 11 2018-01-01         34.6 ^                                  2 &quot;&quot;                     
-## 12 2018-02-01         77.2 ^                                  0 &quot;&quot;</code></pre>
+##  7 2017-09-01         63   &quot;^&quot;                                0 &quot;&quot;                     
+##  8 2017-10-01        141.  &quot;^&quot;                                0 &quot;&quot;                     
+##  9 2017-11-01         70   &quot;^&quot;                                0 &quot;&quot;                     
+## 10 2017-12-01         45.7 &quot;^&quot;                               10 &quot;&quot;                     
+## 11 2018-01-01         34.6 &quot;^&quot;                                2 &quot;&quot;                     
+## 12 2018-02-01         77.2 &quot;^&quot;                                0 &quot;&quot;</code></pre>
 <p>As you can see, we still have the two flags, but the missing data flag (<code>M</code>) is now replaced with NA. The other flag <code>^</code> is not, as it indicates that “The value displayed is based on incomplete data” (see below).</p>
 </div>
 <div id="flags---weather-data" class="section level3">
