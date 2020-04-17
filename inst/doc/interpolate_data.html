@@ -12,7 +12,7 @@
 
 <meta name="author" content="Steffi LaZerte" />
 
-<meta name="date" content="2020-02-04" />
+<meta name="date" content="2020-04-16" />
 
 <title>Interpolating</title>
 
@@ -301,7 +301,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Interpolating</h1>
 <h4 class="author">Steffi LaZerte</h4>
-<h4 class="date">2020-02-04</h4>
+<h4 class="date">2020-04-16</h4>
 
 
 
@@ -317,8 +317,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>You can merge weather data with other data frames by linearly interpolating between points.</p>
 <p>For example, here we have a dataset of weather data from Kamloops</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">glimpse</span>(kamloops)</a></code></pre></div>
-<pre><code>## Observations: 4,368
-## Variables: 35
+<pre><code>## Rows: 4,368
+## Columns: 35
 ## $ station_name     &lt;chr&gt; &quot;KAMLOOPS A&quot;, &quot;KAMLOOPS A&quot;, &quot;KAMLOOPS A&quot;, &quot;KAMLOOPS A&quot;, &quot;KAMLOOPS A&quot;, &quot;K…
 ## $ station_id       &lt;dbl&gt; 51423, 51423, 51423, 51423, 51423, 51423, 51423, 51423, 51423, 51423, 51…
 ## $ station_operator &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
@@ -356,8 +356,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## $ wind_spd_flag    &lt;chr&gt; &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, …</code></pre>
 <p>As well as a data set of finch visits to an RFID feeder</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">glimpse</span>(finches)</a></code></pre></div>
-<pre><code>## Observations: 16,886
-## Variables: 10
+<pre><code>## Rows: 16,886
+## Columns: 10
 ## $ animal_id &lt;fct&gt; 041868FF93, 041868FF93, 041868FF93, 06200003BB, 06200003BB, 06200003BB, 0620000…
 ## $ date      &lt;date&gt; 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-0…
 ## $ time      &lt;dttm&gt; 2016-03-01 06:57:42, 2016-03-01 06:58:41, 2016-03-01 07:07:21, 2016-03-01 07:3…
@@ -398,8 +398,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##  Max.   :50.67   Max.   :16.3712  
 ## </code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">glimpse</span>(finches_temperature)</a></code></pre></div>
-<pre><code>## Observations: 16,886
-## Variables: 11
+<pre><code>## Rows: 16,886
+## Columns: 11
 ## $ animal_id &lt;fct&gt; 041868FF93, 041868FF93, 041868FF93, 06200003BB, 06200003BB, 06200003BB, 0620000…
 ## $ date      &lt;date&gt; 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-0…
 ## $ time      &lt;dttm&gt; 2016-03-01 06:57:42, 2016-03-01 06:58:41, 2016-03-01 07:07:21, 2016-03-01 07:3…
@@ -526,8 +526,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##  Max.   :50.67   Max.   :16.3712   Max.   :44.939  
 ## </code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">glimpse</span>(finches_weather)</a></code></pre></div>
-<pre><code>## Observations: 16,886
-## Variables: 12
+<pre><code>## Rows: 16,886
+## Columns: 12
 ## $ animal_id &lt;fct&gt; 041868FF93, 041868FF93, 041868FF93, 06200003BB, 06200003BB, 06200003BB, 0620000…
 ## $ date      &lt;date&gt; 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-03-01, 2016-0…
 ## $ time      &lt;dttm&gt; 2016-03-01 06:57:42, 2016-03-01 06:58:41, 2016-03-01 07:07:21, 2016-03-01 07:3…
