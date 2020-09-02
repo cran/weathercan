@@ -1,6 +1,6 @@
 ## ---- include = FALSE-------------------------------------------------------------------
 knitr::opts_chunk$set(cache = TRUE)
-options(tibble.max_extra_cols = 0, width = 90)
+old <- options(tibble.max_extra_cols = 0, width = 90)
 
 ## ----setup, message = FALSE-------------------------------------------------------------
 library(weathercan)
@@ -42,4 +42,8 @@ normals_measurements %>%
   filter(stringr::str_detect(measurement, "soil")) %>%
   pull(climate_id) %>%
   unique()
+
+## ---- include = FALSE---------------------------------------------------------
+# Reset options
+options(old)
 
