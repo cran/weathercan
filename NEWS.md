@@ -1,8 +1,12 @@
----
-title: "News"
-author: "Steffi LaZerte"
-output: html_document
----
+# weathercan 0.5.0 (2020-01-14)
+
+## Small changes
+- Internal changes to address change in formatting of historical weather data provided by ECCC 
+  (includes new parameters for the amount of precipitation in mm: `precip_amt`, `precip_amt_flag`; fixes #107) 
+- Updated stations data frame
+
+## Bug fixes
+- Updated normals column values (fixes #106)
 
 # weathercan 0.4.0 (2020-08-26)
 
