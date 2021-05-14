@@ -1,5 +1,4 @@
 ## ---- include = FALSE-------------------------------------------------------------------
-knitr::opts_chunk$set(cache = TRUE)
 old <- options(tibble.max_extra_cols = 0, width = 90)
 
 ## ----setup, message = FALSE-------------------------------------------------------------
@@ -9,10 +8,10 @@ library(dplyr)
 library(naniar) # For exploring missing values
 
 ## ---------------------------------------------------------------------------------------
-stations_search("Winnipeg", normals_only = TRUE)
+stations_search("Winnipeg", normals_years = "current")
 
 ## ---------------------------------------------------------------------------------------
-n <- normals_dl(climate_ids = c("502S001", "5023222", "5023262"))
+n <- normals_dl(climate_ids = "5023222")
 n
 
 ## ---------------------------------------------------------------------------------------
@@ -39,7 +38,8 @@ normals_measurements
 
 ## ---------------------------------------------------------------------------------------
 normals_measurements %>%
-  filter(stringr::str_detect(measurement, "soil")) %>%
+  filter(stringr::str_detect(measurement, "soil"),
+         normals == "1981-2010") %>%
   pull(climate_id) %>%
   unique()
 
