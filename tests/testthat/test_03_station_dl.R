@@ -15,13 +15,13 @@ test_that("stations_dl() requires lutz and sf", {
 })
 
 test_that("stations_dl() errors appropriately", {
+  skip_on_cran()
+  skip_if_not_installed("sf")
+  skip_if_not_installed("lutz")
+
   bkup <- getOption("weathercan.urls.stations")
-
   options(weathercan.urls.stations = "https://httpstat.us/404")
-  vcr::use_cassette("stations_http404", {
-    expect_error(stations_dl(), "Not Found (HTTP 404).", fixed = TRUE)
-  })
-
+  expect_error(stations_dl(), "Not Found (HTTP 404).", fixed = TRUE)
   options(weathercan.urls.stations = bkup)
 })
 
@@ -45,17 +45,17 @@ test_that("stations_dl() runs and updates data", {
 
   #vcr::use_cassette("stations_dl_good", {  # Don't use vcr until deal with url redirects
   #})
-  stub(stations_dl_internal, "Sys.Date", as.Date("2000-01-01"))
-  expect_message(
-    stations_dl_internal(loc = system.file("extdata", package = "weathercan")),
-    "Stations data saved")
-  expect_equal(stations_meta()$weathercan_modified, as.Date("2000-01-01"))
+  stub(stations_dl_internal, "askYesNo", TRUE)
+  stub(stations_dl_internal, "stations_file", file.path("stations.rds"))
+  expect_message(stations_dl_internal(internal = FALSE), "Stations data saved")
+  expect_type(s <- readRDS("stations.rds"), "list") %>%
+    expect_length(2)
+  expect_s3_class(s$stn, "data.frame")
+  expect_gt(nrow(s$stn), 0)
+  expect_type(s$meta, "list") %>%
+    expect_length(2)
 
-  stub(stations_dl_internal, "Sys.Date", Sys.Date())
-  expect_message(
-    stations_dl_internal(loc = system.file("extdata", package = "weathercan")),
-    "Stations data saved")
-  expect_equal(stations_meta()$weathercan_modified, Sys.Date())
+  unlink("stations.rds")
 })
 
 

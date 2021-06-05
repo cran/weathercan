@@ -10,12 +10,12 @@ library(weathercan)
 #  # Reproducibility
 #  stations_meta()
 #  citation('weathercan')
-#  devtools::session_info()
+#  devtools::session_info() # Install devtools if you don't have it
 
 ## ---- eval = TRUE, echo = FALSE, highlight=1----------------------------------
 library(weathercan)
 # Reproducibility
 stations_meta()
 citation('weathercan')
-devtools::session_info()
+if(requireNamespace("devtools", quietly = TRUE)) devtools::session_info()
 
