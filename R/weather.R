@@ -73,27 +73,23 @@
 #'
 #' @return A tibble with station ID, name and weather data.
 #'
-#' @examples
+#' @examplesIf check_eccc()
 #'
-#' \donttest{
-#' if(check_eccc()) {  # Make sure ECCC is available
+#' kam <- weather_dl(station_ids = 51423,
+#'                   start = "2016-01-01", end = "2016-02-15")
 #'
-#'   kam <- weather_dl(station_ids = 51423,
-#'                     start = "2016-01-01", end = "2016-02-15")
+#' stations_search("Kamloops A$", interval = "hour")
+#' stations_search("Prince George Airport", interval = "hour")
 #'
-#'   stations_search("Kamloops A$", interval = "hour")
-#'   stations_search("Prince George Airport", interval = "hour")
+#' kam.pg <- weather_dl(station_ids = c(48248, 51423),
+#'                      start = "2016-01-01", end = "2016-02-15")
 #'
-#'   kam.pg <- weather_dl(station_ids = c(48248, 51423),
-#'                        start = "2016-01-01", end = "2016-02-15")
+#' library(ggplot2)
 #'
-#'   library(ggplot2)
-#'
-#'   ggplot(data = kam.pg, aes(x = time, y = temp,
-#'                             group = station_name,
-#'                             colour = station_name)) +
-#'          geom_line()
-#'  }}
+#' ggplot(data = kam.pg, aes(x = time, y = temp,
+#'                           group = station_name,
+#'                           colour = station_name)) +
+#'        geom_line()
 #'
 #' @aliases weather
 #'
@@ -393,16 +389,16 @@ weather_dl <- function(station_ids,
 }
 
 weather_single <- function(date_range, s, interval, encoding) {
-  w <- dplyr::tibble(date_range = date_range) %>%
-    dplyr::mutate(html = purrr::map(.data$date_range,
+  w <- dplyr::tibble(date_range = date_range)
+  w <- dplyr::mutate(w, html = purrr::map(.data$date_range,
                                     ~ weather_html(station_id = s,
                                                    date = .x,
-                                                   interval = interval)),
-                  data = purrr::map(.data$html,
+                                                   interval = interval)))
+  w <- dplyr::mutate(w, data = purrr::map(.data$html,
                                     ~ weather_raw(.,
                                                   encoding = encoding,
-                                                  header = TRUE))) %>%
-    dplyr::select("data")
+                                                  header = TRUE)))
+  w <- dplyr::select(w, "data")
 
   if(utils::packageVersion("tidyr") > "0.8.99") {
     w <- tidyr::unnest(w, .data$data)
@@ -462,10 +458,12 @@ weather_raw <- function(html, skip = 0,
   }
 
   # Get number of columns
-  ncols <- readr::read_csv(raw, n_max = 1, col_names = FALSE, col_types = readr::cols()) %>%
+  ncols <- readr::read_csv(I(raw), n_max = 1, col_names = FALSE,
+                           col_types = readr::cols(), progress = FALSE) %>%
     ncol()
+  readr::local_edition(1)
   suppressWarnings({ # when some data are missing, final columns not present
-    w <- readr::read_csv(raw, n_max = nrows, skip = skip,
+    w <- readr::read_csv(I(raw), n_max = nrows, skip = skip,
                          col_types = paste(rep("c", ncols), collapse = ""))})
   # Get rid of special symbols right away
   w <- remove_sym(w)

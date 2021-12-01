@@ -40,49 +40,47 @@
 #'
 #' @return tibble with nested normals and first/last frost data
 #'
-#' @examples
+#' @examplesIf check_eccc()
 #'
-#' if(check_eccc()) {
+#' # Find the climate_id
+#' stations_search("Brandon A", normals_years = "current")
 #'
-#'   # Find the climate_id
-#'   stations_search("Brandon A", normals_years = "current")
+#' # Download climate normals 1981-2010
+#' n <- normals_dl(climate_ids = "5010480")
+#' n
 #'
-#'   # Download climate normals 1981-2010
-#'   n <- normals_dl(climate_ids = "5010480")
-#'   n
+#' # Pull out last frost data
+#' library(tidyr)
+#' f <- unnest(n, frost)
+#' f
 #'
-#'   # Pull out last frost data
-#'   library(tidyr)
-#'   f <- unnest(n, frost)
-#'   f
+#' # Pull out normals
+#' nm <- unnest(n, normals)
+#' nm
 #'
-#'   # Pull out normals
-#'   nm <- unnest(n, normals)
-#'   nm
+#' # Download climate normals 1971-2000
+#' n <- normals_dl(climate_ids = "5010480", normals_years = "1971-2000")
+#' n
 #'
-#'   # Download climate normals 1971-2000
-#'   n <- normals_dl(climate_ids = "5010480", normals_years = "1971-2000")
-#'   n
+#' # Note that some do not have last frost dates
+#' n$frost
 #'
-#'   # Note that some do not have last frost dates
-#'   n$frost
+#' # Download multiple stations for 1981-2010,
+#' n <- normals_dl(climate_ids = c("301C3D4", "301FFNJ", "301N49A"))
+#' n
 #'
-#'   # Download multiple stations for 1981-2010,
-#'   n <- normals_dl(climate_ids = c("301C3D4", "301FFNJ", "301N49A"))
-#'   n
-#'
-#'   # Note, putting both into the same data set can be done but makes for
-#'   # a very unweildly dataset (there is lots of repetition)
-#'   nm <- unnest(n, normals)
-#'   f <- unnest(n, frost)
-#'   both <- dplyr::full_join(nm, f)
-#'   both
-#' }
+#' # Note, putting both into the same data set can be done but makes for
+#' # a very unweildly dataset (there is lots of repetition)
+#' nm <- unnest(n, normals)
+#' f <- unnest(n, frost)
+#' both <- dplyr::full_join(nm, f)
+#' both
 #' @export
 
 normals_dl <- function(climate_ids, normals_years = "1981-2010",
                        format = TRUE, stn = NULL,
                        verbose = FALSE, quiet = FALSE) {
+
 
   if(!is.null(stn)){
     stop("`stn` is defunct, to use an updated stations data frame ",
@@ -194,8 +192,10 @@ data_extract <- function(n, climate_id) {
   # Remove frost dates
   n <- frost_find(n, type = "remove")
 
+  readr::local_edition(1)
+
   # Read normals (expect warnings due to header rows, etc.)
-  suppressWarnings(n <- readr::read_csv(n, col_types = readr::cols()))
+  suppressWarnings(n <- readr::read_csv(I(n), col_types = readr::cols()))
 
   if(nrow(n) == 0) return(dplyr::tibble())
 
@@ -333,7 +333,8 @@ frost_extract <- function(f, climate_id) {
   if(length(frost_free) > 0) {
     if(length(frost_probs) == 0) last <- length(f) else last <- frost_probs - 1
 
-    f1 <- readr::read_csv(f[frost_free:last],
+    readr::local_edition(1)
+    f1 <- readr::read_csv(I(f[frost_free:last]),
                           col_names = c("variable", "value", "frost_code"),
                           col_types = readr::cols()) %>%
       tidyr::spread(key = "variable", value = "value")
@@ -350,7 +351,8 @@ frost_extract <- function(f, climate_id) {
 
   # Frost free probabilities
   if(length(frost_probs) > 0) {
-    f2 <- readr::read_csv(f[frost_probs:length(f)],
+    readr::local_edition(1)
+    f2 <- readr::read_csv(I(f[frost_probs:length(f)]),
                           col_names = FALSE, col_types = readr::cols()) %>%
       as.data.frame()
     f2 <- data.frame(prob = rep(c("10%", "25%", "33%", "50%",

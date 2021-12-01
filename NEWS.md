@@ -1,3 +1,13 @@
+# weathercan 0.6.2
+
+- Create cache dir for stations data recursively
+- Fix choice of local vs. package version of stations data frame
+- Update to readr v2
+- Add flexibility for csv/tsv stations files (fixes #126)
+- Update stations url
+- Make examples and tests robust to internet issues
+
+
 # weathercan 0.6.1
 
 ## Small changes
@@ -23,7 +33,7 @@
 ## Bug fixes
 - Download stations data frame from ECCC Google drive rather than ECCC FTP site
 - Update dependency versions (#111, #112, #118)
-- 
+
 
 # weathercan 0.5.0 (2020-01-14)
 
